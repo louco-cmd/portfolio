@@ -58,11 +58,11 @@ header a {
 .hero {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   gap: 50px;
   width: 100%;
   justify-content: space-between;
-  padding: 10%;
+  padding: 5%;
   background-color: #2D2D2D;
   height: 92vh;
   z-index: -10;
@@ -315,7 +315,7 @@ footer {
   }
 
   .hero-text {
-    max-width: 100%;
+    width: 100%;
   }
 
   .hero {
@@ -331,7 +331,7 @@ footer {
   }
 
   .project-card {
-    max-width: 100%;
+    width: 100%;
   }
 
   .project-card .illustration {
