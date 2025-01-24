@@ -87,6 +87,10 @@ header a {
   height: 100vh;
 }
 
+.heroContent {
+  max-width: 50%;
+}
+
 .hero-text {
   max-width: 100%;
   display: flex;
@@ -137,7 +141,7 @@ header a {
 
 .hero-image img {
   position: relative;
-  width: 500px;
+  width: 70vh;
   z-index: 0;
 }
 
@@ -293,6 +297,7 @@ footer {
 
 
 @media screen and (max-width : 950px) {
+
   .hero-text h1 {
     font-size: 2.3rem;
   }
@@ -310,8 +315,8 @@ footer {
   }
 
   .hero-text p {
-    font-size: 1rem;
-    font-weight: 200;
+    font-size: 1.2rem;
+    font-weight: 500;
   }
 
   .hero-text {
@@ -320,6 +325,10 @@ footer {
 
   .hero {
     padding: 10% 10%;
+  }
+
+  .heroContent {
+    max-width: 100%;
   }
 
   .hero-image img {

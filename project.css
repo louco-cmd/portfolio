@@ -90,17 +90,17 @@ nav a {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    box-shadow: 0px 2px 8px rgb(0, 0, 0);
+    /*box-shadow: 0px 2px 8px rgb(0, 0, 0);*/
 }
 
 .heroText {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    padding: 20px 20px 50px 0px;
+    padding: 40px;
     z-index: 100;
     backdrop-filter: blur(10px);
-    width: 50%;
+    width: 60%;
     border-radius: 20px;
     overflow: hidden;
     background-color: #2d2d2d7e;
@@ -218,10 +218,6 @@ h2 {
     display: flex;
     gap: 80px;
     margin-top: 30px;
-}
-
-#partTwo img {
-    width: 50%;
 }
 
 .postitlistmobile {
@@ -418,7 +414,66 @@ footer {
     bottom: -500px;
 }
 
+/*tax France END */
+
+
+/*GEDEO */
+#herogedeo {
+    left: -200px;
+    bottom: -600px;
+}
+
+/*GEDEO END */
+
+/*Coffres */
+#heroCoffre {
+    left: -200px;
+    bottom: -500px;
+}
+
+/*coffre END */
+
+/*Total elements*/
+.totalColors {
+    color: #0093F3;
+}
+
+#heroTotal {
+    left: 30px;
+    bottom: -600px;
+}
+#totalMap{
+    width: 100%;
+}
+
+/*Total elements END*/
+
+/*Gari elements*/
+#heroGari {
+    left: -200px;
+    bottom: -550px;
+}
+
+/*Gari elements*/
 @media screen and (max-width : 950px) {
+    header {
+        padding-top: 30px;
+    }
+
+    #logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        /*box-shadow: 0px 1px 8px rgb(0, 0, 0);*/
+    }
+
+    .grosTitre {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
     .darkpart {
         padding: 10%;
     }
@@ -428,7 +483,7 @@ footer {
     }
 
     p {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .heroText {
@@ -438,6 +493,10 @@ footer {
         backdrop-filter: blur(0px);
         background-color: #2d2d2d00;
         position: relative;
+    }
+
+    .hero .lightLetter {
+        font-weight: 600;
     }
 
     h1 {
@@ -517,8 +576,8 @@ footer {
         flex-direction: column;
     }
 
-    #partTwo img {
-        width: 100%;
+    .parttwoImg {
+        width: 500px;
     }
 
     .postList {
@@ -555,19 +614,49 @@ footer {
     }
 
     #herofrtax {
-        left: -250px;
-        bottom: -320px;
+        left: -350px;
+        bottom: -220px;
+        opacity: 0.3;
     }
 
     #herofencing {
-        bottom: -440px;
+        bottom: -300px;
         left: -270px;
+        opacity: 0.3;
     }
 
     #heroEDOC {
-        left: -160px;
-        bottom: -290px;
+        left: -320px;
+        bottom: -220px;
         width: 1220px;
+        opacity: 0.3;
     }
 
+    #heroCoffre {
+        left: -400px;
+        bottom: -200px;
+        opacity: 0.3;
+    }
+
+    #herogedeo {
+        left: -500px;
+        bottom: -200px;
+        opacity: 0.3;
+    }
+
+    #heroLaposte {
+        opacity: 0.3;
+    }
+
+    #heroTotal {
+        left: -300px;
+        bottom: -350px;
+        opacity: 0.3;
+    }
+
+    #heroGari {
+        left: -400px;
+        bottom: -250px;
+        opacity: 0.3;
+    }
 }
