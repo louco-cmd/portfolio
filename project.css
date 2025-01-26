@@ -197,6 +197,7 @@ h2 {
     padding: 2% 5%;
     gap: 18px;
     position: relative;
+    overflow: hidden;
 }
 
 .next {

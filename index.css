@@ -317,14 +317,11 @@ footer {
   .hero-text p {
     font-size: 1.2rem;
     font-weight: 500;
+    width: 350px;
   }
 
   .hero-text {
     width: 100%;
-  }
-
-  .hero {
-    padding: 10% 10%;
   }
 
   .heroContent {
