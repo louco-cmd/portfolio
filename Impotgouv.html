@@ -10,16 +10,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back_ios" />
 </head>
 
 <body>
     <header>
         <nav>
-            <a href="./index.html" id="backHome"><span class="material-symbols-outlined">
-                    arrow_back_ios
-                </span>Homepage</a>
+            <a href="./index.html" id="backHome"><img
+                    src="./image/chevron_left_24dp_434343_FILL0_wght400_GRAD0_opsz24.svg" alt="">Homepage</a>
             <a href="https://www.linkedin.com/in/louis-cochet-9362b8135/" target="_blank"><img width="20px"
                     src="./image/LinkedIn logo.png" alt="linkedin Logo" class="linkedinlogo"></a>
         </nav>
@@ -32,11 +29,13 @@
                 <h1>Taxes declaration</h1>
             </div>
             <H2 class="lightLetter">Revamping Impôt.gouv</H2>
-            <p class="lightLetter">This project is focused on improving the official French tax website, Impôt.gouv, by modernizing its
+            <p class="lightLetter">This project is focused on improving the official French tax website, Impôt.gouv, by
+                modernizing its
                 design, enhancing user interaction, and making it more intuitive. The goal is to simplify tax
                 declaration and access to government services for French citizens, making the experience smoother and
                 more efficient.</p>
-            <p class="lightLetter">With a complete redesign of the interface, we aim to make taxes less intimidating and more user-friendly
+            <p class="lightLetter">With a complete redesign of the interface, we aim to make taxes less intimidating and
+                more user-friendly
                 for all. Click below to see the design process!</p>
             <a href="#partOne" class="next">See case study</a>
         </div>
@@ -48,20 +47,29 @@
             experience and ensuring accessibility for everyone.</p>
         <div class="stepper">
             <a class="stepPost" href="#partTwo">
-                <h3 class="lightLetter">1.</h3>
-                <h4 class="lightLetter">Research</h4>
-                <p class="lightLetter">In this phase, I analyzed the existing user experience conducting an ergonomic review</p>
+                <div>
+                    <h3 class="lightLetter">1.</h3>
+                    <h4 class="lightLetter">Research</h4>
+                </div>
+                <p class="lightLetter">In this phase, I analyzed the existing user experience conducting an ergonomic
+                    review</p>
             </a>
             <a class="stepPost" href="#partThree">
-                <h3 class="lightLetter">2.</h3>
-                <h4 class="lightLetter">Sketching</h4>
-                <p class="lightLetter">I began sketching ideas based on the research findings to create wireframes and map out the new site
+                <div>
+                    <h3 class="lightLetter">2.</h3>
+                    <h4 class="lightLetter">Sketching</h4>
+                </div>
+                <p class="lightLetter">I began sketching ideas based on the research findings to create wireframes and
+                    map out the new site
                     layout.</p>
             </a>
             <a class="stepPost" href="#partFour">
-                <h3 class="lightLetter">3.</h3>
-                <h4 class="lightLetter">Prototyping</h4>
-                <p class="lightLetter">I developed prototypes to test the new design concepts and gathered feedback before moving on to
+                <div>
+                    <h3 class="lightLetter">3.</h3>
+                    <h4 class="lightLetter">Prototyping</h4>
+                </div>
+                <p class="lightLetter">I developed prototypes to test the new design concepts and gathered feedback
+                    before moving on to
                     development.</p>
             </a>
         </div>
@@ -70,38 +78,37 @@
     </section>
     <section class="darkpart" id="partTwo">
         <H2 class="lightLetter">Research - Ergonomic review</H2>
-        <p class="lightLetter">My ergonomic review focused on identifying areas where the website could be more user-friendly. I evaluated
+        <p class="lightLetter">My ergonomic review focused on identifying areas where the website could be more
+            user-friendly. I evaluated
             the site’s layout, ease of navigation, and accessibility features to improve the overall user experience.
         </p>
         <div class="contentDisplay">
             <img src="./French tax project img/Etude ergonomique.png" alt="" class="parttwoImg">
             <div class="postList">
                 <div class="post-it">
-                    <h2>Reminder</h2>
-                    <p>Check your email by noon!</p>
+                    <h2>Unity</h2>
+                    <p>Harmonize style and actions. Same look and feel expect the same effect.</p>
                 </div>
                 <div class="post-it">
-                    <h2>Reminder</h2>
-                    <p>Check your email by noon!</p>
+                    <h2>Distinction</h2>
+                    <p>Be clearer in information herarchy.</p>
                 </div>
                 <div class="post-it">
-                    <h2>Reminder</h2>
-                    <p>Check your email by noon!</p>
+                    <h2>Guidance</h2>
+                    <p>Use clearer wording and bring clear guidance on actions</p>
                 </div>
                 <div class="post-it">
-                    <h2>Reminder</h2>
-                    <p>Check your email by noon!</p>
-                </div>
-                <div class="post-it">
-                    <h2>Reminder</h2>
-                    <p>Check your email by noon!</p>
+                    <h2>Progressive disclosure</h2>
+                    <p>Reduce infomaiton noise and show meaningful information at the right time</p>
                 </div>
             </div>
         </div>
         <div class="postitlistmobile">
             <ul>
-                <li>Element uno</li>
-                <li>element dos</li>
+                <li>Unity : harmonize style and actions. Same look and feel expect the same effect. </li>
+                <li>Distinction : Be clearer in information herarchy.</li>
+                <li>Guidance : se clearer wording and bring clear guidance on actions</li>
+                <li>Progressive disclosure : Reduce infomaiton noise and show meaningful information at the right time</li>
             </ul>
         </div>
         <a href="#partThree" class="nextBis">Sketching</a>
@@ -124,7 +131,8 @@
 
     <section class="darkpart" id="partFour">
         <H2 class="lightLetter">The prototype</H2>
-        <p class="lightLetter">After gathering user feedback from the initial design and research phases, I moved on to prototyping. This
+        <p class="lightLetter">After gathering user feedback from the initial design and research phases, I moved on to
+            prototyping. This
             interactive prototype demonstrates the new user interface, offering an opportunity to explore the features
             before full development begins.</p>
         <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="700px"
