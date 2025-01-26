@@ -62,7 +62,7 @@ header a {
   gap: 50px;
   width: 100%;
   justify-content: space-between;
-  padding: 5%;
+  padding: 10%;
   background-color: #2D2D2D;
   height: 92vh;
   z-index: -10;
@@ -315,7 +315,7 @@ footer {
   }
 
   .hero-text p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
     width: 350px;
   }

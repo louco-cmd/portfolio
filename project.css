@@ -78,7 +78,7 @@ nav a {
 .hero {
     background-color: #2D2D2D;
     height: 100vh;
-    padding: 5%;
+    padding: 10%;
     display: flex;
     flex-direction: row;
     gap: 100px;
@@ -97,7 +97,6 @@ nav a {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    padding: 40px;
     z-index: 100;
     backdrop-filter: blur(10px);
     width: 60%;
