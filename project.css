@@ -105,7 +105,9 @@ nav a {
     overflow: hidden;
     background-color: #2d2d2d7e;
 }
-
+.objectiveList{
+padding-left: 20px;
+}
 .heroImg {
     width: 150%;
     overflow: hidden;
@@ -220,6 +222,11 @@ h2 {
     margin-top: 30px;
 }
 
+
+.parttwoImg {
+    width: 50%;
+}
+
 .postitlistmobile {
     display: none;
 }
@@ -254,6 +261,7 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    align-items: flex-start;
 }
 
 /* Optional: Add a pin */
@@ -399,11 +407,18 @@ footer {
 }
 
 /*BNP colors END*/
+
+/*HTM elements*/
+#heroHTM{
+    left: -200px;
+    bottom: -450px;
+}
+/*HTM elements END*/
+
 /*EDOC elements*/
 #heroEDOC {
     left: 70px;
     bottom: -650px;
-
 }
 
 /*EDOC elements END*/
@@ -445,6 +460,9 @@ footer {
 #totalMap{
     width: 100%;
 }
+.resultTotal{
+    display: flex;
+}
 
 /*Total elements END*/
 
@@ -453,7 +471,10 @@ footer {
     left: -200px;
     bottom: -550px;
 }
-
+.diaryimg{
+    width: 100%;
+    overflow: hidden;
+}
 /*Gari elements*/
 @media screen and (max-width : 950px) {
     header {
@@ -577,7 +598,8 @@ footer {
     }
 
     .parttwoImg {
-        width: 500px;
+        width: 100%;
+        overflow: hidden;
     }
 
     .postList {
@@ -658,5 +680,13 @@ footer {
         left: -400px;
         bottom: -250px;
         opacity: 0.3;
+    }
+    #heroHTM{
+        left: -400px;
+        bottom: -250px;
+        opacity: 0.3;
+    }
+    .resultTotal{
+        display: flex;
     }
 }
