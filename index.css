@@ -62,7 +62,7 @@ header a {
   gap: 50px;
   width: 100%;
   justify-content: space-between;
-  padding: 10%;
+  padding: 5% 10%;
   background-color: #2D2D2D;
   height: 92vh;
   z-index: -10;
@@ -294,7 +294,6 @@ footer {
   transform: scale(1.1);
   /* Agrandissement au survol */
 }
-
 
 @media screen and (max-width : 950px) {
 

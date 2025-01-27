@@ -80,12 +80,13 @@ nav a {
 .hero {
     background-color: #2D2D2D;
     height: 100vh;
-    padding: 10%;
+    padding: 5%;
     display: flex;
     flex-direction: row;
     gap: 100px;
     position: relative;
     overflow: hidden;
+    align-items: center;
 }
 
 #logo {
@@ -102,13 +103,17 @@ nav a {
     z-index: 100;
     backdrop-filter: blur(10px);
     width: 60%;
+    height: fit-content;
     border-radius: 20px;
     overflow: hidden;
-    background-color: #2d2d2d7e;
+    padding: 80px;
+    background-color: #2d2d2d9f;
 }
-.objectiveList{
-padding-left: 20px;
+
+.objectiveList {
+    padding-left: 20px;
 }
+
 .heroImg {
     width: 150%;
     overflow: hidden;
@@ -242,7 +247,6 @@ h2 {
     border-radius: 5px;
     padding: 20px;
     position: relative;
-    transform: rotate(2deg);
     font-size: 1rem;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     transform-origin: bottom right;
@@ -271,7 +275,7 @@ h2 {
     content: '';
     width: 20px;
     height: 20px;
-    background-color: rgb(12, 12, 12);
+    background-color: rgb(97, 97, 97);
     border-radius: 50%;
     position: absolute;
     top: -10px;
@@ -284,6 +288,10 @@ h2 {
     display: flex;
     flex-direction: row;
     gap: 80px;
+}
+
+.PartThreedisplay .element p {
+    padding-top: px;
 }
 
 .element {
@@ -345,7 +353,7 @@ footer {
 }
 
 .nextBis:hover {
-    background-color: #213663;
+    background-color: #2d2d2d;
     color: #ffffff;
     border: #ffffff solid 1px;
 }
@@ -411,10 +419,11 @@ footer {
 /*BNP colors END*/
 
 /*HTM elements*/
-#heroHTM{
+#heroHTM {
     left: -200px;
     bottom: -450px;
 }
+
 /*HTM elements END*/
 
 /*EDOC elements*/
@@ -422,15 +431,18 @@ footer {
     left: 70px;
     bottom: -650px;
 }
-#edocMap{
+
+#edocMap {
     width: 80%;
 }
-.edocParttrois{
+
+.edocParttrois {
     flex-direction: column;
     gap: 20px;
     width: 100%;
 }
-.edocParttrois p{
+
+.edocParttrois p {
     width: 100%;
 }
 
@@ -471,10 +483,12 @@ footer {
     left: 30px;
     bottom: -600px;
 }
-#totalMap{
+
+#totalMap {
     width: 100%;
 }
-.resultTotal{
+
+.resultTotal {
     display: flex;
 }
 
@@ -485,10 +499,12 @@ footer {
     left: -200px;
     bottom: -550px;
 }
-.diaryimg{
+
+.diaryimg {
     width: 100%;
     overflow: hidden;
 }
+
 /*Gari elements*/
 @media screen and (max-width : 950px) {
     header {
@@ -521,6 +537,10 @@ footer {
         font-size: 1rem;
     }
 
+    .hero {
+        align-items: flex-start;
+    }
+
     .heroText {
         width: 100%;
         top: 60px;
@@ -528,6 +548,7 @@ footer {
         backdrop-filter: blur(0px);
         background-color: #2d2d2d00;
         position: relative;
+        padding: 5%;
     }
 
     .hero .lightLetter {
@@ -695,12 +716,23 @@ footer {
         bottom: -250px;
         opacity: 0.3;
     }
-    #heroHTM{
+
+    #heroHTM {
         left: -400px;
         bottom: -250px;
         opacity: 0.3;
     }
-    .resultTotal{
+
+    .resultTotal {
         display: flex;
+    }
+
+    .post-it {
+        width: 40%;
+        max-height: 250px;
+    }
+
+    .PartThreedisplay .element p {
+        padding-top: 0px;
     }
 }
