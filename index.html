@@ -35,28 +35,25 @@
   </header>
 
   <section class="hero">
-    <div class="Animation" id="hero"></div>
+    <!---->
+    <div class="Animation desktopOption" id="hero"></div>
     <div class="heroContent">
       <div class="hero-text">
         <div class="jobdesc">
           <p>Hello I am ...</p>
           <h1>LOUIS COCHET</h1>
-          <h2>Product Designer</h2>
-          <h3>Product Owner</h3>
-          <h4>Project Manager</h4>
+          <h2 id="element"></h2>
         </div>
 
         <p>A passionate Product Designer with a knack for crafting user-friendly and visually striking digital
           experiences. My journey combines creativity, strategy, and collaboration to transform ideas into meaningful
           designs. Whether it’s leading projects as a Product Owner or bringing innovative concepts to life, I thrive on
           solving challenges and delivering value through design. Let’s create something amazing together!</p>
-        <a href="#projects" class="next">See more case studies 👇</a>
+        <a href="#projects" class="next">See my projects 👇</a>
       </div>
 
     </div>
-    <div class="hero-image">
-      <img src="./image/home header illustration.png" alt="Project Mockup">
-    </div>
+    <img src="./image/home header illustration.svg" alt="Project Mockup" class="hero-image">
   </section>
 
 
@@ -206,6 +203,25 @@
     quantity: 4.00,
     backgroundAlpha: 0.00
   })
+</script>
+<script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
+<script>
+  new TypeIt("#element", {
+    speed: 80,
+    waitUntilVisible: true,
+  })
+    .type("UX Desinger", { delay: 300 })
+    .delete(11)
+    .type("Product Owner", { delay: 300 })
+    .delete(5)
+    .type("designer", { delay: 300 })
+    .move(-7)
+    .delete(1)
+    .type("D")
+    .move(7, { delay: 1000 })
+    .type(" 😇")
+    .go();
+
 </script>
 
 </html>

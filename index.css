@@ -13,7 +13,7 @@ html {
 
 body {
   font-family: Arial, sans-serif;
-  color: #2D2D2D;
+  color: #1c1c1c;
   line-height: 1.6;
 }
 
@@ -22,7 +22,7 @@ header {
   display: flex;
   justify-content: flex-end;
   padding: 3vh 10%;
-  background-color: #2D2D2D;
+  background-color: #1c1c1c;
 }
 
 nav {
@@ -41,7 +41,7 @@ header a {
 .next {
   text-decoration: none;
   background-color: white;
-  color: #2D2D2D;
+  color: #1c1c1c;
   padding: 10px 15px;
   text-align: center;
   border-radius: 8px;
@@ -50,9 +50,9 @@ header a {
 }
 
 .next:hover {
-  background-color: #2D2D2D;
-  color: #ff4500;
-  border: #ff4500 solid 1px;
+  background-color: #1c1c1c;
+  color: white;
+  border: white solid 1px;
 }
 
 .hero {
@@ -63,7 +63,7 @@ header a {
   width: 100%;
   justify-content: space-between;
   padding: 5% 10%;
-  background-color: #2D2D2D;
+  background-color: #1c1c1c;
   height: 92vh;
   z-index: -10;
 }
@@ -72,6 +72,7 @@ header a {
   display: flex;
   flex-direction: column;
   gap: 0px;
+  width: 100%;
 }
 
 .hero p {
@@ -92,14 +93,14 @@ header a {
 }
 
 .hero-text {
-  max-width: 100%;
+  width: 800px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
 .hero-text h1 {
-  font-size: 4rem;
+  font-size: 6rem;
   color: #ff4500;
   line-height: 110%;
   max-width: 100%;
@@ -139,9 +140,11 @@ header a {
   z-index: 10;
 }
 
-.hero-image img {
-  position: relative;
-  width: 70vh;
+.hero-image{
+  position: absolute;
+  width: 400px;
+  right: 150px;
+  bottom: -12px;
   z-index: 0;
 }
 
@@ -170,12 +173,13 @@ header a {
   padding-right: 20px;
   padding-bottom: 0px;
   gap: 20px;
-  border-color: #2D2D2D;
+  border: 1px solid #e2e2e2;
   background: rgb(192, 192, 192);
   background: linear-gradient(0deg, rgba(192, 192, 192, 1) 0%, rgba(255, 255, 255, 1) 39%);
   border-radius: 10px;
-  box-shadow: 0px 2px 8px rgb(186, 186, 186);
   width: 45%;
+
+  transition: 0.3s ease;
 }
 
 .topcard {
@@ -215,7 +219,8 @@ header a {
 .project-card:hover {
   background: rgb(138, 138, 138);
   background: linear-gradient(0deg, rgba(138, 138, 138, 1) 0%, rgba(255, 255, 255, 1) 39%);
-  transition: background-color 0.3s ease;
+  box-shadow: 2px 16px 8px rgb(129, 129, 129);
+  transform: translate(0, -10px);
 }
 
 .listMoreProj {
@@ -295,14 +300,27 @@ footer {
   /* Agrandissement au survol */
 }
 
+.desktopOption{
+  display: None;
+}
+
 @media screen and (max-width : 950px) {
 
+  .desktopOption{
+    display: Block;
+  }
+  .hero{
+    width: 100vw;
+    flex-direction: column;
+  }
   .hero-text h1 {
-    font-size: 2.3rem;
+    font-size: 5rem;
+    width: 100%;
   }
 
   .hero-text h2 {
-    font-size: 1.8rem;
+    font-size: 2rem;
+    width: 100%;
   }
 
   .hero-text h3 {
@@ -316,7 +334,7 @@ footer {
   .hero-text p {
     font-size: 1rem;
     font-weight: 500;
-    width: 350px;
+    width: 100%;
   }
 
   .hero-text {
@@ -327,7 +345,7 @@ footer {
     max-width: 100%;
   }
 
-  .hero-image img {
+  .hero-image{
     display: none;
   }
 
