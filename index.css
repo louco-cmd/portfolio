@@ -68,6 +68,8 @@ header a {
   background-color: #1c1c1c;
   height: 92vh;
   z-index: -10;
+  overflow: hidden;
+  position: relative;
 }
 
 .jobdesc {
