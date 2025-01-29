@@ -1,8 +1,10 @@
+@import url('amulya.css');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Open Sans", serif;
+    font-family: 'Amulya-Medium';
     font-optical-sizing: auto;
     font-style: normal;
 }
@@ -13,14 +15,14 @@ html {
 
 body {
     font-family: Arial, sans-serif;
-    color: #2D2D2D;
+    color: #1c1c1c;
     line-height: 1.6;
 }
 
 header {
     display: flex;
     padding: 3vh 5%;
-    background-color: #2D2D2D;
+    background-color: #1c1c1c;
     position: absolute;
     right: 0px;
     width: 100%;
@@ -48,7 +50,7 @@ nav a {
     align-items: center;
     gap: 8px;
     background-color: white;
-    color: #2D2D2D;
+    color: #1c1c1c;
 }
 
 #backHome span {
@@ -57,16 +59,9 @@ nav a {
 
 #backHome:hover {
     background-color: white;
-    color: #2D2D2D;
+    color: #1c1c1c;
 }
 
-.material-symbols-outlined {
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 20
-}
 
 .svgback {
     font-size: 5px;
@@ -78,15 +73,13 @@ nav a {
 }
 
 .hero {
-    background-color: #2D2D2D;
+    background-color: #1c1c1c;
     height: 100vh;
     padding: 5%;
     display: flex;
-    flex-direction: row;
-    gap: 100px;
+    flex-direction: column;
     position: relative;
     overflow: hidden;
-    align-items: center;
 }
 
 #logo {
@@ -107,7 +100,8 @@ nav a {
     border-radius: 20px;
     overflow: hidden;
     padding: 80px;
-    background-color: #2d2d2d9f;
+    background-color: #1c1c1c9f;
+    justify-content: center;
 }
 
 .objectiveList {
@@ -116,11 +110,11 @@ nav a {
 
 .heroImg {
     width: 150%;
-    overflow: hidden;
     position: absolute;
     left: 200px;
     bottom: -450px;
-    z-index: 0;
+    z-index: 3;
+    opacity: 0.5;
 }
 
 .grosTitre {
@@ -131,7 +125,7 @@ nav a {
 }
 
 h1 {
-    font-size: 3.5rem;
+    font-size: 5rem;
     color: #D59B20;
     line-height: 110%;
     max-width: 100%;
@@ -141,7 +135,7 @@ h1 {
 
 .gellule {
     background-color: #dddcdc;
-    color: #2D2D2D;
+    color: #1c1c1c;
     width: 140px;
     display: flex;
     justify-content: center;
@@ -168,7 +162,7 @@ h2 {
 }
 
 .darkLetter {
-    color: #2D2D2D;
+    color: #1c1c1c;
 }
 
 .lightLetter {
@@ -196,7 +190,7 @@ h2 {
 }
 
 .darkpart {
-    background-color: #2D2D2D;
+    background-color: #1c1c1c;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -204,6 +198,10 @@ h2 {
     gap: 18px;
     position: relative;
     overflow: hidden;
+}
+
+#mainInfo {
+    z-index: -2;
 }
 
 .next {
@@ -317,7 +315,7 @@ footer {
     bottom: 20px;
     right: 20px;
     z-index: 100;
-    background-color: #2d2d2d;
+    background-color: #1c1c1c;
     color: #ffffff;
     border: none;
     border-radius: 50%;
@@ -353,7 +351,7 @@ footer {
 }
 
 .nextBis:hover {
-    background-color: #2d2d2d;
+    background-color: #1c1c1c;
     color: #ffffff;
     border: #ffffff solid 1px;
 }
@@ -429,7 +427,7 @@ footer {
 /*EDOC elements*/
 #heroEDOC {
     left: 70px;
-    bottom: -650px;
+    bottom:-650px;
 }
 
 #edocMap {
@@ -546,7 +544,7 @@ footer {
         top: 60px;
         gap: 20px;
         backdrop-filter: blur(0px);
-        background-color: #2d2d2d00;
+        background-color: #1c1c1c00;
         position: relative;
         padding: 5%;
     }
