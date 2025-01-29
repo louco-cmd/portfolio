@@ -67,7 +67,7 @@ header a {
   padding: 5% 10%;
   background-color: #1c1c1c;
   height: 92vh;
-  z-index: -10;
+  z-index: 1;
   overflow: hidden;
   position: relative;
 }
