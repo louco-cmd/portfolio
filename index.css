@@ -16,7 +16,7 @@ html {
 
 body {
   font-family: Arial, sans-serif;
-  color: #000000;
+  color: #000016;
   line-height: 1.6;
 }
 
@@ -25,7 +25,7 @@ header {
   display: flex;
   justify-content: flex-end;
   padding: 3vh 10%;
-  background-color: #000000;
+  background-color: #000016;
 }
 
 nav {
@@ -44,16 +44,16 @@ header a {
 .next {
   text-decoration: none;
   background-color: white;
-  color: #1c1c1c;
-  padding: 10px 15px;
+  color: #000016;
+  padding: 10px 25px;
   text-align: center;
   border-radius: 8px;
-  width: 250px;
+  width: fit-content;
   z-index: 100;
 }
 
 .next:hover {
-  background-color: #000000;
+  background-color: #000016;
   color: white;
   border: white solid 1px;
 }
@@ -66,7 +66,7 @@ header a {
   width: 100%;
   justify-content: space-between;
   padding: 5% 10%;
-  background-color: #000000;
+  background-color: #000016;
   height: 92vh;
   z-index: 1;
   overflow: hidden;
@@ -191,9 +191,20 @@ header a {
   font-family: 'Amulya-Light';
 }
 
+.cardText,.cardTextSecondary  h2 {
+  font-size: 3rem;
+  line-height: 3rem;
+}
+
 .cardText h2 {
   font-size: 3rem;
   line-height: 2rem;
+}
+
+.cardText,.cardTextSecondary  h3 {
+  font-size: 2.5rem;
+  font-weight: 50;
+  font-family: 'Amulya-light';
 }
 
 .cardText h3 {
@@ -222,12 +233,13 @@ header a {
 }
 
 .backgroundS {
-  background-color: #000000;
+  background-color: #000016;
   overflow: hidden;
 }
 
-.postbg {
-  background-color: #001539;
+.backgroundS:hover{
+  background-color: #000045;
+  transition: all .5s;
 }
 
 
@@ -257,9 +269,6 @@ header a {
   right: -500px;
   transition: all .5s;
 }
-.backgroundS:hover .postbg {
-  background-color: #001539;
-}
 
 .escrimeimg {
   background-image: url(./image/escrime\ tuile.jpg);
@@ -271,22 +280,12 @@ header a {
   width: fit-content;
   display: flex;
   justify-content: center;
+  align-items: center;
   border-radius: 50px;
   font-size: small;
   margin-bottom: 30px;
   padding: 0px 15px;
-}
-
-.gelluledark {
-  background-color: #525252;
-  color: rgb(255, 255, 255);
-  width: fit-content;
-  display: flex;
-  justify-content: center;
-  border-radius: 50px;
-  font-size: small;
-  margin-bottom: 10px;
-  padding: 0px 15px;
+  height: 32px;
 }
 
 .logo {
@@ -303,49 +302,42 @@ header a {
   width: 100%;
 }
 
+.cardTextSecondary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: 'Amulya-Light';
+}
+
 .addprojectcard {
   display: flex;
   flex-direction: row;
   gap: 50px;
-  border-radius: 10px;
-  justify-content: space-between;
+  border-radius: 20px;
+  background-color: #000016;
   text-decoration: none;
-  color: #1c1c1c;
-  min-height: 160px;
+  color: #ffffff;
+  height: fit-content;
   border: 1px solid #e2e2e2;
   width: 100%;
+  padding: 40px;
 }
 
-.cardleft {
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  gap: 50px;
+.addprojectcard:hover .cardTextSecondary h2{
+  letter-spacing: 0.5rem;
+  transition: all .5s;
 }
 
-.hoverblack {
-  opacity: 0;
-  display: flex;
-  visibility: hidden;
-  background-color: #2D2D2D;
-  border-radius: 0px 10px 10px 0px;
-  color: #ffffff;
-  width: 200px;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 1s ease, visibility 3s ease;
-  /* Transition fluide */
+.addprojectcard:hover{
+  background-color: #000045;
+  transition: all .5s;
 }
 
-.addprojectcard:hover .hoverblack {
-  visibility: visible;
-  opacity: 1;
-}
 
 footer {
   text-align: center;
   padding: 20px;
-  background-color: #2D2D2D;
+  background-color: #000016;;
   color: #777;
 }
 
@@ -354,7 +346,7 @@ footer {
   bottom: 20px;
   right: 20px;
   z-index: 100;
-  background-color: #2d2d2d;
+  background-color: #000016;
   color: #ffffff;
   border: none;
   border-radius: 50%;
@@ -448,9 +440,15 @@ footer {
     visibility: hidden;
   }
 
+  .listMoreProj{
+    gap: 20px;
+  }
+
   .addprojectcard {
     flex-direction: column;
     gap: 0px;
+    padding: 20px;
+    height: 205px;
   }
 
   .cardleft {
@@ -477,6 +475,19 @@ footer {
   font-size: 1.5rem;
   font-weight: 50;
 }
+
+.cardTextSecondary h2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.cardTextSecondary h3 {
+  font-size: 1rem;
+  font-weight: 50;
+  line-height: 1rem;
+}
+.ca
+
 .vignette {
   position: relative;
   height: 400px;
