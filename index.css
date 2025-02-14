@@ -191,7 +191,8 @@ header a {
   font-family: 'Amulya-Light';
 }
 
-.cardText,.cardTextSecondary  h2 {
+.cardText,
+.cardTextSecondary h2 {
   font-size: 3rem;
   line-height: 3rem;
 }
@@ -201,7 +202,8 @@ header a {
   line-height: 2rem;
 }
 
-.cardText,.cardTextSecondary  h3 {
+.cardText,
+.cardTextSecondary h3 {
   font-size: 2.5rem;
   font-weight: 50;
   font-family: 'Amulya-light';
@@ -237,7 +239,7 @@ header a {
   overflow: hidden;
 }
 
-.backgroundS:hover{
+.backgroundS:hover {
   background-color: #000045;
   transition: all .5s;
 }
@@ -249,6 +251,7 @@ header a {
   bottom: -300px;
   right: -100px;
 }
+
 .vignettePost {
   position: relative;
   height: 500px;
@@ -323,12 +326,12 @@ header a {
   padding: 40px;
 }
 
-.addprojectcard:hover .cardTextSecondary h2{
+.addprojectcard:hover .cardTextSecondary h2 {
   letter-spacing: 0.5rem;
   transition: all .5s;
 }
 
-.addprojectcard:hover{
+.addprojectcard:hover {
   background-color: #000045;
   transition: all .5s;
 }
@@ -337,7 +340,8 @@ header a {
 footer {
   text-align: center;
   padding: 20px;
-  background-color: #000016;;
+  background-color: #000016;
+  ;
   color: #777;
 }
 
@@ -426,12 +430,12 @@ footer {
     width: 100%;
     height: 500px;
   }
-  
+
   #large {
     width: 100%;
     height: 500px;
   }
-  
+
   .project-card .illustration {
     height: 200px;
   }
@@ -440,7 +444,7 @@ footer {
     visibility: hidden;
   }
 
-  .listMoreProj{
+  .listMoreProj {
     gap: 20px;
   }
 
@@ -454,47 +458,53 @@ footer {
   .cardleft {
     gap: 20px;
   }
+
   .vignettePost {
     position: relative;
     height: 250px;
     bottom: -300px;
     right: -100px;
   }
-  
-.backgroundS:hover .vignettePost {
-  height: 250px;
+
+  .backgroundS:hover .vignettePost {
+    height: 250px;
     bottom: -300px;
     right: -100px;
-}
-.cardText h2 {
-  font-size: 2rem;
-  line-height: 2rem;
-}
+  }
 
-.cardText h3 {
-  font-size: 1.5rem;
-  font-weight: 50;
-}
+  .cardText h2 {
+    font-size: 2rem;
+    line-height: 2rem;
+  }
 
-.cardTextSecondary h2 {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
+  .cardText h3 {
+    font-size: 1.5rem;
+    font-weight: 50;
+  }
 
-.cardTextSecondary h3 {
-  font-size: 1rem;
-  font-weight: 50;
-  line-height: 1rem;
-}
-.ca
+  .cardTextSecondary h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
 
-.vignette {
-  position: relative;
-  height: 400px;
-  bottom: -200px;
-  right: -0px;
-}
-.cardText {
-  padding: 20px;
-}
+  .cardTextSecondary h3 {
+    font-size: 1rem;
+    font-weight: 50;
+    line-height: 1rem;
+  }
+
+  .ca .vignette {
+    position: relative;
+    height: 400px;
+    bottom: -200px;
+    right: -0px;
+  }
+
+  .vignette {
+    bottom: -200px;
+  }
+
+  .cardText {
+    padding: 20px;
+  }
 }
