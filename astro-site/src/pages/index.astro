@@ -1,0 +1,359 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const projects = (await getCollection('projects', (p) => !p.data.draft)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const pad = (n: number) => String(n + 1).padStart(2, '0');
+---
+
+<BaseLayout title="Portfolio Louis Cochet">
+  <Header />
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-grain" aria-hidden="true"></div>
+
+    <div class="container hero-inner">
+      <div class="hero-main">
+        <p class="eyebrow hero-eyebrow" data-reveal>Product Designer — Shanghai</p>
+
+        <div class="hero-center">
+          <h1 class="hero-name" data-reveal>
+            <span class="line">Louis</span>
+            <span class="line">Cochet</span>
+          </h1>
+
+          <div class="hero-role" data-reveal>
+            <span class="hero-role-static">Currently</span>
+            <span id="rotator" class="hero-role-word">UX Designer</span>
+          </div>
+
+          <p class="hero-lead" data-reveal>
+            I craft calm, user-focused digital experiences — blending research,
+            strategy and craft to turn fuzzy problems into products that feel obvious.
+          </p>
+        </div>
+      </div>
+
+      <a href="#projects" class="scroll-hint" data-reveal aria-label="Scroll to projects">
+        <span>Explore my projects</span>
+        <svg width="14" height="22" viewBox="0 0 14 22" fill="none" aria-hidden="true">
+          <path d="M7 1v18m0 0l-5-5m5 5l5-5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= PROJECTS ================= -->
+  <section class="section-work" id="projects">
+    <div class="container">
+      <header class="work-head" data-reveal>
+        <h2>Explore my projects</h2>
+        <p>{projects.length} projects — product design, revamps & tools.</p>
+      </header>
+
+      <div class="work-grid">
+        {projects.map((p, i) => (
+          <a
+            class:list={["pcard", p.data.layout === 'large' ? 'pcard--wide' : '']}
+            href={`/projects/${p.id}/`}
+            data-reveal
+            style={`transition-delay:${(i % 3) * 70}ms`}
+          >
+            {p.data.cover ? (
+              <div class="pcard-media">
+                <img src={p.data.cover} alt="" loading="lazy" />
+              </div>
+            ) : p.data.vignette ? (
+              <div class="pcard-logo" aria-hidden="true">
+                <img src={p.data.vignette} alt="" loading="lazy" />
+              </div>
+            ) : (
+              <span class="pcard-index" aria-hidden="true">{pad(i)}</span>
+            )}
+            <div class="pcard-body">
+              <span class="eyebrow">{p.data.cardKicker}{p.data.year ? ` · ${p.data.year}` : ''}</span>
+              <h3>{p.data.title}</h3>
+              <p>{p.data.cardSubtitle}</p>
+              <span class="pcard-arrow">
+                View case
+                <svg width="20" height="10" viewBox="0 0 20 10" fill="none" aria-hidden="true">
+                  <path d="M14 1l4 4-4 4M1 5h17" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT / CONTACT ================= -->
+  <section class="section-about">
+    <div class="container about-inner" data-reveal>
+      <p class="eyebrow">About</p>
+      <p class="about-statement">
+        A passionate Product Designer blending creativity, strategy and
+        collaboration — turning ideas into meaningful, usable designs.
+      </p>
+      <a href="https://www.linkedin.com/in/louis-cochet-9362b8135/" target="_blank" rel="noopener" class="btn">
+        Let's talk
+        <svg width="18" height="9" viewBox="0 0 20 10" fill="none" aria-hidden="true">
+          <path d="M14 1l4 4-4 4M1 5h17" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    overflow: hidden;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-5);
+    width: 100%;
+    padding-block: clamp(56px, 7vh, 88px) clamp(40px, 6vh, 72px);
+  }
+  .hero-main { display: flex; flex-direction: column; }
+  .hero-center { display: flex; flex-direction: column; }
+
+  /* ambient drifting glow — replaces the birds */
+  .hero-glow {
+    position: absolute;
+    top: -20%; left: 50%;
+    width: 80vw; height: 80vw;
+    max-width: 1100px; max-height: 1100px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle at center, rgba(120,130,160,0.18), rgba(10,10,12,0) 60%);
+    filter: blur(20px);
+    z-index: 0;
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+  @keyframes drift {
+    from { transform: translateX(-60%) translateY(-4%); }
+    to   { transform: translateX(-40%) translateY(6%); }
+  }
+  .hero-grain {
+    position: absolute; inset: 0; z-index: 1; opacity: 0.04; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .hero-eyebrow { margin: 0 0 var(--s-4); }
+  .hero-name {
+    font-family: var(--font-light);
+    font-weight: 300;
+    font-size: clamp(3rem, 11vw, 8.5rem);
+    line-height: 0.94;
+    letter-spacing: -0.03em;
+    background: var(--silver);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero-name .line { display: block; }
+
+  .hero-role {
+    display: flex; align-items: baseline; gap: 12px;
+    margin-top: var(--s-3);
+    font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+  }
+  .hero-role-static { color: var(--text-dim); }
+  .hero-role-word {
+    color: var(--text);
+    font-family: var(--font-medium);
+    transition: opacity 0.25s ease;
+  }
+
+  .hero-lead {
+    margin-top: var(--s-3);
+    max-width: 46ch;
+    color: var(--text-muted);
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  .hero-cta { display: flex; gap: var(--s-2); margin-top: var(--s-5); flex-wrap: wrap; }
+  .btn--ghost { border-color: var(--line); color: var(--text-muted); }
+  .btn--ghost:hover { color: var(--bg); }
+
+  .scroll-hint {
+    flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--text);
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .scroll-hint:hover { color: var(--text); }
+  .scroll-hint svg { animation: bob 2.2s ease-in-out infinite; }
+  @keyframes bob { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(5px);} }
+
+  /* ============ WORK ============ */
+  .section-work { padding-block: clamp(80px, 12vw, 160px); }
+  .work-head {
+    display: flex; justify-content: space-between; align-items: flex-end; gap: var(--s-3);
+    flex-wrap: wrap;
+    padding-bottom: var(--s-4);
+    margin-bottom: var(--s-5);
+    border-bottom: 1px solid var(--line);
+  }
+  .work-head h2 { font-family: var(--font-medium); font-weight: 500; font-size: clamp(2.2rem, 5.5vw, 3.8rem); letter-spacing: -0.02em; line-height: 1.02; }
+  .work-head p { color: var(--text-dim); }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-3);
+  }
+  .pcard--wide { grid-column: span 2; }
+
+  .pcard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 300px;
+    padding: var(--s-4);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    text-decoration: none;
+    overflow: hidden;
+    transition: border-color 0.4s ease, transform 0.4s ease, background 0.4s ease;
+  }
+  .pcard--wide { min-height: 420px; }
+  .pcard:hover { border-color: var(--line-strong); transform: translateY(-4px); background: var(--surface-2); }
+
+  .pcard-media { position: absolute; inset: 0; z-index: 0; }
+  .pcard-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; filter: grayscale(0.2); }
+  .pcard:hover .pcard-media img { transform: scale(1.05); }
+  .pcard-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,12,0) 30%, rgba(10,10,12,0.85) 100%); }
+
+  .pcard-index {
+    position: absolute; top: var(--s-3); right: var(--s-4); z-index: 0;
+    font-family: var(--font-light); font-size: 4rem; color: var(--line-strong);
+    line-height: 1;
+  }
+
+  /* faint project logo / vignette watermark */
+  .pcard-logo {
+    position: absolute;
+    right: -6%;
+    top: 50%;
+    width: 58%;
+    max-width: 260px;
+    transform: translateY(-50%);
+    z-index: 0;
+    opacity: 0.16;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 40%);
+    mask-image: linear-gradient(90deg, transparent, #000 40%);
+  }
+  .pcard-logo img { width: 100%; height: auto; }
+  .pcard:hover .pcard-logo { opacity: 0.32; transform: translateY(-50%) scale(1.04); }
+
+  .pcard-body { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 8px; }
+  .pcard-body h3 { font-family: var(--font-light); font-weight: 300; font-size: clamp(1.4rem, 3vw, 2.2rem); color: var(--text); letter-spacing: -0.01em; }
+  .pcard-body > p { color: var(--text-muted); }
+  .pcard-arrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-top: var(--s-2); color: var(--text-muted); font-size: 0.9rem;
+    opacity: 0; transform: translateY(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease, gap 0.3s ease;
+  }
+  .pcard:hover .pcard-arrow { opacity: 1; transform: translateY(0); color: var(--text); }
+  .pcard:hover .pcard-arrow { gap: 16px; }
+
+  /* ============ ABOUT ============ */
+  .section-about { padding-block: clamp(90px, 14vw, 180px); border-top: 1px solid var(--line); }
+  .about-inner { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-4); }
+  .about-statement {
+    font-family: var(--font-light); font-weight: 300;
+    font-size: clamp(1.6rem, 4.5vw, 3.4rem);
+    line-height: 1.2; letter-spacing: -0.01em;
+    max-width: 20ch; color: var(--text);
+  }
+
+  /* ============ SCROLL REVEAL ============ */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.75s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.75s cubic-bezier(0.2, 0.6, 0.2, 1);
+    will-change: opacity, transform;
+  }
+  [data-reveal].is-visible { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] { opacity: 1; transform: none; transition: none; }
+    .hero-glow, .scroll-hint svg { animation: none; }
+  }
+
+  @media (max-width: 760px) {
+    .work-grid { grid-template-columns: 1fr; }
+    .pcard--wide { grid-column: span 1; }
+    .hero-role { gap: 8px; }
+    .hero { min-height: auto; }
+    .hero-inner {
+      flex-direction: column; align-items: flex-start;
+      justify-content: flex-start;
+      padding-block: clamp(88px, 20vw, 120px) clamp(56px, 16vw, 88px);
+    }
+    .scroll-hint { align-self: center; margin-top: var(--s-5); }
+    .section-work { padding-block: clamp(40px, 10vw, 64px) clamp(56px, 14vw, 96px); }
+    .work-head h2 { font-size: clamp(1.9rem, 9vw, 2.6rem); overflow-wrap: break-word; }
+  }
+</style>
+
+<script>
+  // Scroll-reveal
+  const reveals = document.querySelectorAll('[data-reveal]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) {
+    reveals.forEach((el) => el.classList.add('is-visible'));
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+    );
+    reveals.forEach((el) => io.observe(el));
+  }
+
+  // Rotating role word
+  const rotator = document.getElementById('rotator');
+  if (rotator && !reduce) {
+    const words = ['UX Designer', 'UX Researcher', 'Product Manager'];
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % words.length;
+      rotator.style.opacity = '0';
+      setTimeout(() => {
+        rotator.textContent = words[i];
+        rotator.style.opacity = '1';
+      }, 250);
+    }, 2600);
+  }
+</script>

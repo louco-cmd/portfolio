@@ -1,0 +1,400 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import BackToTop from '../../components/BackToTop.astro';
+import Lightbox from '../../components/Lightbox.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((p) => ({ params: { id: p.id }, props: { project: p } }));
+}
+
+const { project } = Astro.props;
+const d = project.data;
+const { Content } = await render(project);
+
+const meta = [
+  d.client && { label: 'Client', value: d.client },
+  d.role && { label: 'Role', value: d.role },
+  d.year && { label: 'Year', value: d.year },
+  d.scope && { label: 'Scope', value: d.scope },
+  d.tools.length ? { label: 'Tools', value: d.tools.join(', ') } : null,
+].filter(Boolean) as { label: string; value: string }[];
+
+const pad = (n: number) => String(n + 1).padStart(2, '0');
+const sectionId = (n: number) => `section-${pad(n)}`;
+const stepTarget = (i: number, j: number, href?: string) => {
+  if (href) return href;
+  const target = i + 1 + j;
+  return target < d.sections.length ? `#${sectionId(target)}` : undefined;
+};
+---
+
+<BaseLayout title={`${d.title} — Louis Cochet`} description={d.subtitle}>
+  <Header />
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="container">
+      <a href="/#projects" class="back-link">
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true">
+          <path d="M6 1L1 6l5 5M1 6h14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>All projects</span>
+      </a>
+      <p class="eyebrow hero-kicker">
+        {d.cardKicker}{d.year ? ` — ${d.year}` : ''}
+      </p>
+      <h1 class="hero-title">{d.title}</h1>
+      {d.subtitle && <p class="hero-sub">{d.subtitle}</p>}
+
+      {meta.length > 0 && (
+        <dl class="meta">
+          {meta.map((m) => (
+            <div class="meta-item">
+              <dt>{m.label}</dt>
+              <dd>{m.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </div>
+
+    {d.heroImage && (
+      <div class="container">
+        <figure class="hero-figure">
+          <img src={d.heroImage} alt={d.title} loading="eager" data-lb />
+        </figure>
+      </div>
+    )}
+  </header>
+
+  <!-- ============ OVERVIEW ============ -->
+  {(d.context || d.demand) && (
+    <section class="band">
+      <div class="container overview">
+        {d.context && (
+          <div class="ov-row">
+            <span class="ov-label eyebrow">Context</span>
+            <div class="ov-body">
+              <p set:html={d.context} />
+              {d.objectives.length > 0 && (
+                <ul class="checklist">
+                  {d.objectives.map((o) => <li>{o}</li>)}
+                </ul>
+              )}
+            </div>
+          </div>
+        )}
+        {d.demand && (
+          <div class="ov-row">
+            <span class="ov-label eyebrow">Brief</span>
+            <div class="ov-body"><p set:html={d.demand} /></div>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- ============ SECTIONS ============ -->
+  {d.sections.map((s, i) => {
+    if (s.type === 'steps') {
+      return (
+        <section class="band" id={sectionId(i)}>
+          <div class="container">
+            <header class="sec-head">
+              <span class="sec-index">{pad(i)}</span>
+              <div>
+                <h2>{s.title}</h2>
+                {s.intro && <p class="sec-intro">{s.intro}</p>}
+              </div>
+            </header>
+            <ol class="process">
+              {s.steps.map((st, j) => {
+                const target = stepTarget(i, j, st.href);
+                const Tag = target ? 'a' : 'div';
+                return (
+                  <li class="process-step">
+                    <Tag class="process-link" href={target}>
+                      <span class="process-num">{pad(j)}</span>
+                      <span class="process-body">
+                        <span class="process-label">{st.label}</span>
+                        <span class="process-text">{st.text}</span>
+                      </span>
+                      {target && <span class="process-arrow" aria-hidden="true">→</span>}
+                    </Tag>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        </section>
+      );
+    }
+
+    if (s.type === 'postits') {
+      return (
+        <section class="band band--surface" id={sectionId(i)}>
+          <div class="container">
+            <header class="sec-head">
+              <span class="sec-index">{pad(i)}</span>
+              <div>
+                <h2>{s.title}</h2>
+                {s.intro && <p class="sec-intro">{s.intro}</p>}
+              </div>
+            </header>
+            <div class="insights">
+              {s.image && (
+                <figure class="insights-media">
+                  <img src={s.image} alt="" loading="lazy" data-lb />
+                </figure>
+              )}
+              <ul class="insight-list">
+                {s.postits.map((n) => (
+                  <li class="insight">
+                    <h3>{n.title}</h3>
+                    <p>{n.text}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    if (s.type === 'gallery') {
+      return (
+        <section class="band" id={sectionId(i)}>
+          <div class="container">
+            {(s.title || s.intro) && (
+              <header class="sec-head">
+                <span class="sec-index">{pad(i)}</span>
+                <div>
+                  {s.title && <h2>{s.title}</h2>}
+                  {s.intro && <p class="sec-intro">{s.intro}</p>}
+                </div>
+              </header>
+            )}
+            <div class="gallery">
+              {s.items.map((it) => (
+                <figure class="gallery-item">
+                  <img src={it.image} alt={it.caption ?? ''} loading="lazy" data-lb />
+                  {it.caption && <figcaption class="eyebrow">{it.caption}</figcaption>}
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    if (s.type === 'text') {
+      return (
+        <section class="band" id={sectionId(i)}>
+          <div class="container">
+            <header class="sec-head">
+              <span class="sec-index">{pad(i)}</span>
+              <div>{s.title && <h2>{s.title}</h2>}</div>
+            </header>
+            <div class="prose"><p set:html={s.body} /></div>
+          </div>
+        </section>
+      );
+    }
+
+    if (s.type === 'embed') {
+      return (
+        <section class="band band--surface" id={sectionId(i)}>
+          <div class="container">
+            <header class="sec-head">
+              <span class="sec-index">{pad(i)}</span>
+              <div>
+                {s.title && <h2>{s.title}</h2>}
+                {s.intro && <p class="sec-intro">{s.intro}</p>}
+              </div>
+            </header>
+            <div class="embed-frame">
+              <iframe src={s.src} height={s.height} loading="lazy" allowfullscreen></iframe>
+            </div>
+          </div>
+        </section>
+      );
+    }
+    return null;
+  })}
+
+  <div class="container mdx-body"><Content /></div>
+
+  <Lightbox />
+  <BackToTop />
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* ============ HERO ============ */
+  .hero {
+    padding-top: clamp(56px, 10vh, 110px);
+    padding-bottom: var(--s-6);
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: var(--s-5);
+    transition: color 0.25s ease, gap 0.25s ease;
+  }
+  .back-link:hover { color: var(--text); gap: 13px; }
+  .hero-kicker { margin-bottom: var(--s-3); }
+  .hero-title {
+    font-family: var(--font-light);
+    font-weight: 300;
+    font-size: clamp(2.8rem, 8vw, 6.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    background: var(--silver);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    max-width: 16ch;
+  }
+  .hero-sub {
+    margin-top: var(--s-4);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: var(--text-muted);
+    max-width: 48ch;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--s-4);
+    margin-top: var(--s-6);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--line);
+  }
+  .meta-item dt {
+    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 8px;
+  }
+  .meta-item dd { color: var(--text); font-size: 1rem; }
+
+  .hero-figure {
+    margin-top: var(--s-6);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .hero-figure img { width: 100%; height: auto; }
+
+  /* ============ BANDS ============ */
+  .band { padding-block: clamp(80px, 12vw, 160px); }
+  .band--surface { background: var(--surface); border-block: 1px solid var(--line); }
+
+  .sec-head {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: var(--s-3);
+    align-items: start;
+    margin-bottom: var(--s-6);
+    padding-bottom: var(--s-4);
+    border-bottom: 1px solid var(--line);
+  }
+  .sec-index { font-family: var(--font-medium); color: var(--text-dim); font-size: 1rem; padding-top: 10px; }
+  .sec-head h2 {
+    font-family: var(--font-light);
+    font-weight: 300;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+  }
+  .sec-intro { margin-top: var(--s-3); color: var(--text-muted); max-width: var(--measure); font-weight: 300; }
+
+  /* ---- Overview (Context / Brief) ---- */
+  .overview { display: flex; flex-direction: column; }
+  .ov-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: var(--s-4);
+    padding-block: var(--s-5);
+    border-top: 1px solid var(--line);
+  }
+  .ov-row:last-child { border-bottom: 1px solid var(--line); }
+  .ov-label { padding-top: 6px; }
+  .ov-body { max-width: var(--measure); }
+  .ov-body p { color: var(--text); font-size: 1.15rem; line-height: 1.7; font-weight: 300; }
+  .checklist { list-style: none; margin-top: var(--s-3); display: flex; flex-direction: column; gap: 12px; }
+  .checklist li { position: relative; padding-left: 26px; color: var(--text-muted); }
+  .checklist li::before {
+    content: ''; position: absolute; left: 0; top: 11px;
+    width: 10px; height: 1px; background: var(--text-dim);
+  }
+
+  /* ---- Process ---- */
+  .process { list-style: none; display: flex; flex-direction: column; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .process-step { background: var(--bg); transition: background 0.3s ease; }
+  .process-step:hover { background: var(--surface-2); }
+  .process-link {
+    display: flex; align-items: center; gap: var(--s-3);
+    padding: 18px var(--s-4);
+    color: inherit; text-decoration: none; width: 100%;
+  }
+  .process-num { font-family: var(--font-medium); color: var(--text-dim); font-size: 0.9rem; flex-shrink: 0; min-width: 2ch; }
+  .process-body { display: flex; align-items: baseline; gap: 12px; min-width: 0; flex: 1; }
+  .process-label { font-size: 1.05rem; font-family: var(--font-medium); font-weight: 400; white-space: nowrap; flex-shrink: 0; }
+  .process-text { color: var(--text-muted); font-weight: 300; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .process-arrow { color: var(--text-dim); flex-shrink: 0; transition: transform 0.3s ease, color 0.3s ease; }
+  a.process-link:hover .process-arrow { color: var(--text); transform: translateX(4px); }
+  a.process-link:hover .process-label { color: var(--text); }
+
+  .band[id] { scroll-margin-top: 90px; }
+
+  @media (max-width: 640px) {
+    .process-body { flex-direction: column; gap: 2px; }
+    .process-label { white-space: normal; }
+  }
+
+  /* ---- Insights (ex post-its) ---- */
+  .insights { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--s-5); align-items: start; }
+  .insights-media { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: var(--bg); }
+  .insight-list { list-style: none; display: flex; flex-direction: column; gap: var(--s-2); }
+  .insight {
+    border: 1px solid var(--line); border-radius: 12px;
+    padding: var(--s-3) var(--s-4); background: var(--bg);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .insight:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+  .insight h3 { font-size: 1.1rem; font-weight: 400; font-family: var(--font-medium); margin-bottom: 6px; }
+  .insight p { color: var(--text-muted); font-weight: 300; }
+
+  /* ---- Gallery ---- */
+  .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--s-5); }
+  .gallery-item { display: flex; flex-direction: column; gap: var(--s-3); }
+  .gallery-item img { width: 100%; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); }
+  .gallery-item figcaption { color: var(--text-dim); }
+
+  /* ---- Prose ---- */
+  .prose { max-width: var(--measure); }
+  .prose p { color: var(--text); font-size: 1.15rem; line-height: 1.7; font-weight: 300; }
+
+  /* ---- Embed ---- */
+  .embed-frame { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: var(--bg); }
+  .embed-frame iframe { width: 100%; border: 0; display: block; }
+
+  .mdx-body:empty { display: none; }
+
+  @media (max-width: 760px) {
+    .sec-head { grid-template-columns: 1fr; gap: 8px; }
+    .sec-index { padding-top: 0; }
+    .ov-row { grid-template-columns: 1fr; gap: var(--s-2); }
+    .insights { grid-template-columns: 1fr; gap: var(--s-4); }
+  }
+</style>

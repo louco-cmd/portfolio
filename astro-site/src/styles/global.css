@@ -1,0 +1,117 @@
+@import './fonts.css';
+
+/* ============================================================
+   Design tokens — dark / silver editorial system
+   Change the brand in one place.
+   ============================================================ */
+:root {
+  /* Surfaces (near-black, layered) */
+  --bg: #0a0a0c;
+  --surface: #121318;
+  --surface-2: #181a20;
+  --line: rgba(255, 255, 255, 0.10);
+  --line-strong: rgba(255, 255, 255, 0.18);
+
+  /* Text (silver scale) */
+  --text: #ebecef;
+  --text-muted: #9a9ca4;
+  --text-dim: #63656d;
+
+  /* Metallic silver accent for display type */
+  --silver: linear-gradient(160deg, #ffffff 0%, #c7c9cf 42%, #7e8088 100%);
+
+  /* Legacy brand tokens (home still uses these) */
+  --navy: #0a0a0c;
+  --navy-hover: #181a20;
+  --orange: #ff4500;
+  --white: #ffffff;
+  --ink: #0a0a0c;
+  --muted: #63656d;
+  --light-text: #9a9ca4;
+
+  /* Type */
+  --font-body: 'Amulya-Regular', 'Helvetica Neue', Arial, sans-serif;
+  --font-light: 'Amulya-Light', 'Helvetica Neue', Arial, sans-serif;
+  --font-medium: 'Amulya-Medium', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'BespokeStencil-Medium', Georgia, serif;
+
+  /* Spacing scale (8px base, generous) */
+  --s-1: 8px;
+  --s-2: 16px;
+  --s-3: 24px;
+  --s-4: 40px;
+  --s-5: 64px;
+  --s-6: 96px;
+  --s-7: 140px;
+  --s-8: 200px;
+
+  --maxw: 1180px;
+  --measure: 62ch;
+  --radius: 14px;
+  --gutter: clamp(20px, 6vw, 80px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-optical-sizing: auto; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+::selection { background: rgba(255, 255, 255, 0.85); color: #0a0a0c; }
+
+/* ---- Shared helpers ---- */
+.container { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+
+.eyebrow {
+  font-family: var(--font-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text);
+  padding: 13px 24px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+.gellule {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line-strong);
+  color: var(--text-muted);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0 14px;
+  height: 30px;
+}
+
+.lightLetter { color: var(--text); }
+.darkLetter { color: var(--bg); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
