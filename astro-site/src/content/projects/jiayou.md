@@ -3,7 +3,7 @@ cardKicker: Product
 cardTitle: CHINESE LEARNING APP
 cardSubtitle: Jiayou — founder & product
 layout: large
-cover: "/jiayou/community.webp"
+vignette: "/jiayou/Icon app.png"
 order: 0
 
 title: Jiayou
@@ -20,6 +20,7 @@ tools:
   - React Native
   - Node.js
 heroImage: "/jiayou/Chat.svg"
+heroPerched: true
 context: >
   While living in China, I needed to learn Chinese and keep track of my own
   progress — but no existing tool really fit the way I wanted to learn. So I
@@ -124,6 +125,7 @@ sections:
         caption: JiaStore — community-made Chinese vocabulary word packs
 
   - type: gallery
+    variant: carousel
     title: The Jiayou Time Machine
     intro: >
       A signature feature. Travel through the history of a character: drag the

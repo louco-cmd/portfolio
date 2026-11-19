@@ -27,12 +27,14 @@ const section = z.discriminatedUnion('type', [
     image: z.string().optional(),
     postits: z.array(z.object({ title: z.string(), text: z.string() })),
   }),
-  // Two-up (or more) image gallery with captions
+  // Two-up (or more) image gallery with captions.
+  // variant 'carousel' = horizontal scroll row with prev/next buttons.
   z.object({
     type: z.literal('gallery'),
     title: z.string().optional(),
     intro: z.string().optional(),
     tone: z.enum(['light', 'dark']).default('light'),
+    variant: z.enum(['grid', 'carousel']).default('grid'),
     items: z.array(z.object({ caption: z.string().optional(), image: z.string() })),
   }),
   // Plain text block
@@ -72,6 +74,7 @@ const projects = defineCollection({
     objectives: z.array(z.string()).default([]),
     demand: z.string().optional(),
     heroImage: z.string().optional(),
+    heroPerched: z.boolean().default(false), // hero image perched on the meta divider instead of a full figure
 
     // --- Meta block (editorial header) ---
     client: z.string().optional(),

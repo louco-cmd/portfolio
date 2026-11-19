@@ -51,7 +51,10 @@ const stepTarget = (i: number, j: number, href?: string) => {
       {d.subtitle && <p class="hero-sub">{d.subtitle}</p>}
 
       {meta.length > 0 && (
-        <dl class="meta">
+        <dl class:list={["meta", d.heroImage && d.heroPerched ? 'meta--perched' : '']}>
+          {d.heroImage && d.heroPerched && (
+            <img class="meta-perch" src={d.heroImage} alt="" loading="eager" aria-hidden="true" />
+          )}
           {meta.map((m) => (
             <div class="meta-item">
               <dt>{m.label}</dt>
@@ -62,7 +65,7 @@ const stepTarget = (i: number, j: number, href?: string) => {
       )}
     </div>
 
-    {d.heroImage && (
+    {d.heroImage && !d.heroPerched && (
       <div class="container">
         <figure class="hero-figure">
           <img src={d.heroImage} alt={d.title} loading="eager" data-lb />
@@ -178,14 +181,29 @@ const stepTarget = (i: number, j: number, href?: string) => {
                 </div>
               </header>
             )}
-            <div class="gallery">
-              {s.items.map((it) => (
-                <figure class="gallery-item">
-                  <img src={it.image} alt={it.caption ?? ''} loading="lazy" data-lb />
-                  {it.caption && <figcaption class="eyebrow">{it.caption}</figcaption>}
-                </figure>
-              ))}
-            </div>
+            {s.variant === 'carousel' ? (
+              <div class="carousel" data-carousel>
+                <button class="carousel-btn carousel-prev" data-carousel-prev aria-label="Previous">‹</button>
+                <div class="carousel-track" data-carousel-track>
+                  {s.items.map((it) => (
+                    <figure class="carousel-item">
+                      <img src={it.image} alt={it.caption ?? ''} loading="lazy" data-lb />
+                      {it.caption && <figcaption class="eyebrow">{it.caption}</figcaption>}
+                    </figure>
+                  ))}
+                </div>
+                <button class="carousel-btn carousel-next" data-carousel-next aria-label="Next">›</button>
+              </div>
+            ) : (
+              <div class="gallery">
+                {s.items.map((it) => (
+                  <figure class="gallery-item">
+                    <img src={it.image} alt={it.caption ?? ''} loading="lazy" data-lb />
+                    {it.caption && <figcaption class="eyebrow">{it.caption}</figcaption>}
+                  </figure>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       );
@@ -279,6 +297,21 @@ const stepTarget = (i: number, j: number, href?: string) => {
     margin-top: var(--s-6);
     padding-top: var(--s-4);
     border-top: 1px solid var(--line);
+  }
+  .meta--perched { position: relative; margin-top: clamp(90px, 16vw, 150px); }
+  .meta-perch {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% - 1px); /* sit the base of the image on the divider line */
+    width: clamp(110px, 20vw, 180px);
+    height: auto;
+    pointer-events: none;
+    filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.45));
+    animation: perch-float 5.5s ease-in-out infinite;
+  }
+  @keyframes perch-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
   }
   .meta-item dt {
     font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
@@ -381,6 +414,43 @@ const stepTarget = (i: number, j: number, href?: string) => {
   .gallery-item img { width: 100%; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); }
   .gallery-item figcaption { color: var(--text-dim); }
 
+  /* ---- Carousel (horizontal scroll + swipe buttons) ---- */
+  .carousel { position: relative; display: flex; align-items: center; gap: var(--s-3); }
+  .carousel-track {
+    display: flex; gap: var(--s-4);
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 4px 2px var(--s-2);
+    -ms-overflow-style: none; scrollbar-width: none;
+    flex: 1; min-width: 0;
+  }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  .carousel-item {
+    flex: 0 0 auto; width: clamp(220px, 42vw, 300px);
+    scroll-snap-align: center;
+    display: flex; flex-direction: column; gap: var(--s-3);
+  }
+  .carousel-item img {
+    width: 100%; border-radius: var(--radius);
+    border: 1px solid var(--line); background: var(--surface);
+  }
+  .carousel-item figcaption { color: var(--text-dim); text-align: center; }
+  .carousel-btn {
+    flex-shrink: 0;
+    width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; line-height: 1; padding-bottom: 4px;
+    background: var(--surface-2); color: var(--text);
+    border: 1px solid var(--line-strong); cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+  }
+  .carousel-btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .carousel-btn[disabled] { opacity: 0.3; cursor: default; }
+  .carousel-btn[disabled]:hover { background: var(--surface-2); color: var(--text); border-color: var(--line-strong); }
+  @media (max-width: 640px) {
+    .carousel-btn { width: 40px; height: 40px; font-size: 24px; }
+  }
+
   /* ---- Prose ---- */
   .prose { max-width: var(--measure); }
   .prose p { color: var(--text); font-size: 1.15rem; line-height: 1.7; font-weight: 300; }
@@ -398,3 +468,30 @@ const stepTarget = (i: number, j: number, href?: string) => {
     .insights { grid-template-columns: 1fr; gap: var(--s-4); }
   }
 </style>
+
+<script>
+  document.querySelectorAll('[data-carousel]').forEach((car) => {
+    const track = car.querySelector('[data-carousel-track]') as HTMLElement;
+    const prev = car.querySelector('[data-carousel-prev]') as HTMLButtonElement;
+    const next = car.querySelector('[data-carousel-next]') as HTMLButtonElement;
+    if (!track || !prev || !next) return;
+
+    const step = () => {
+      const item = track.querySelector('.carousel-item') as HTMLElement;
+      const gap = parseFloat(getComputedStyle(track).columnGap || '0') || 24;
+      return item ? item.offsetWidth + gap : track.clientWidth * 0.8;
+    };
+
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth - 2;
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max;
+    };
+
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
+</script>
