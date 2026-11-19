@@ -64,6 +64,7 @@ const projects = defineCollection({
     layout: z.enum(['large', 'small', 'secondary']).default('secondary'),
     cover: z.string().optional(), // background image (large cards)
     vignette: z.string().optional(), // floating image (small cards)
+    cardMascot: z.boolean().default(false), // render the vignette full-color, resting on the card border
     order: z.number().default(99),
     draft: z.boolean().default(false),
 

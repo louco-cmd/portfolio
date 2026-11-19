@@ -60,7 +60,7 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
       <div class="work-grid">
         {projects.map((p, i) => (
           <a
-            class:list={["pcard", p.data.layout === 'large' ? 'pcard--wide' : '']}
+            class:list={["pcard", p.data.layout === 'large' ? 'pcard--wide' : '', !p.data.cover && p.data.vignette && p.data.cardMascot ? 'pcard--mascot' : '']}
             href={`/projects/${p.id}/`}
             data-reveal
             style={`transition-delay:${(i % 3) * 70}ms`}
@@ -69,6 +69,8 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
               <div class="pcard-media">
                 <img src={p.data.cover} alt="" loading="lazy" />
               </div>
+            ) : p.data.vignette && p.data.cardMascot ? (
+              <img class="pcard-mascot" src={p.data.vignette} alt="" loading="lazy" aria-hidden="true" />
             ) : p.data.vignette ? (
               <div class="pcard-logo" aria-hidden="true">
                 <img src={p.data.vignette} alt="" loading="lazy" />
@@ -268,6 +270,20 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
   }
   .pcard-logo img { width: 100%; height: auto; }
   .pcard:hover .pcard-logo { opacity: 0.32; transform: translateY(-50%) scale(1.04); }
+
+  /* full-color mascot resting (sleeping) on the card's top border */
+  .pcard--mascot { overflow: visible; margin-top: clamp(48px, 7vw, 88px); }
+  .pcard-mascot {
+    position: absolute;
+    right: clamp(18px, 5%, 56px);
+    bottom: calc(100% - 2px); /* base sits on the top border line */
+    width: clamp(150px, 26%, 300px);
+    height: auto;
+    z-index: 2;
+    filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.5));
+    transition: transform 0.4s ease;
+  }
+  .pcard--mascot:hover .pcard-mascot { transform: translateY(-4px) rotate(-2deg); }
 
   .pcard-body { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 8px; }
   .pcard-body h3 { font-family: var(--font-light); font-weight: 300; font-size: clamp(1.4rem, 3vw, 2.2rem); color: var(--text); letter-spacing: -0.01em; }

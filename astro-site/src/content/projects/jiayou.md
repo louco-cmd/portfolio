@@ -4,6 +4,7 @@ cardTitle: CHINESE LEARNING APP
 cardSubtitle: Jiayou — founder & product
 layout: large
 vignette: "/jiayou/Chat.svg"
+cardMascot: true
 order: 0
 
 title: Jiayou
