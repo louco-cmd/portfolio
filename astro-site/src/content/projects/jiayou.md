@@ -3,7 +3,7 @@ cardKicker: Product
 cardTitle: CHINESE LEARNING APP
 cardSubtitle: Jiayou — founder & product
 layout: large
-vignette: "/jiayou/Icon app.png"
+vignette: "/jiayou/Chat.svg"
 order: 0
 
 title: Jiayou
